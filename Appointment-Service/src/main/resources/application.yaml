@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: appointment-service
+server:
+  port: 8083
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      doctorServiceCB:
+        failure-rate-threshold: 50
+        minimum-number-of-calls: 5
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3
+
+logging:
+  level:
+    io:
+      github:
+        resilience4j: DEBUG
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
